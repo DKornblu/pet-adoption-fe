@@ -1,0 +1,159 @@
+#root,
+body,
+html {
+  /* border: 1px solid red; */
+  height: 100%;
+}
+
+.App {
+  /* border: solid blue 4px; */
+  padding: 3rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #48ade0; */
+}
+
+.App header {
+  border: 1px green dashed;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  width: 100%;
+  padding: 2rem;
+  background-color: #13678A;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App header input {
+  border-radius: 8px;
+  padding-left: 1rem;
+  /* align-self: flex-end;
+  justify-self: flex-end; */
+}
+
+.QuackIcon {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  color: white;
+}
+
+.DuckImg {
+  /* border: 1px solid blue; */
+  width: 3rem;
+}
+
+.QuackName {
+  font-family: 'Sigmar', cursive;
+  font-size: 2rem;
+}
+
+.Home {
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* .headerSpace {
+  border: 1px solid red;
+  height: 500px;
+} */
+
+.Welcome {
+  padding: 1rem 5rem;
+  text-align: center;
+}
+
+.AboutContainer {
+  /* border: 1px solid red; */
+  border-bottom: 1px solid black;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* align-items: center; */
+  /* overflow: hidden; */
+}
+
+@media screen and (max-width: 900px) {
+  .AboutContainer {
+    flex-direction: column;
+  }
+  .Welcome {
+    padding-top: 200px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .AboutContainer img {
+    display: none;
+  }
+  .Welcome {
+    padding-top: 0px;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .Welcome {
+    margin-top: 200px;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .App {
+    padding: 8rem 15% 3rem 15%;
+  }
+}
+
+.About {
+  /* border: 1px dashed blue; */
+  padding: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  flex-basis: 1;
+}
+
+.About p {
+  /* border: 1px solid green; */
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.ModalBtn {
+  width: 12rem;
+}
+
+.AboutContainer img {
+  /* object-fit:contain; */
+  width: 350px;
+  height: fit-content;
+  border-radius: 50px;
+  border: 1px solid;
+  margin: 3rem;
+  padding: 4px;
+  box-shadow: 15px 20px #888888;
+  align-self: center;
+  justify-self: center;
+  flex-basis: 1;
+}
+
+.PetListContainer {
+  border: 1px solid red;
+  margin-top: 2rem;
+  width: 100%;
+}

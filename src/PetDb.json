@@ -1,0 +1,38 @@
+[
+    {
+        "Type": "dog",
+        "Name": "Mr. McPaws",
+        "Adoption Status": "foster",
+        "Picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvkvnFrJqJnq-YH-10fWv_cpASGwyvjkcHYEV4HCO24zhUHot1st4wP9o&s",
+        "Height": "10 inches",
+        "Color": "Beige",
+        "Bio": "Mr. McPaws is one of the cutest pups you'll ever meet. While he is young, he has an old soul, hence the prefix 'Mr'. Mr. McPaws enjoys playing fetch, eating potato chips and snuggling up on a couch.",
+        "Hypoallergenic": "yes",
+        "Dietary Restrictions": "none",
+        "Breed": "Golden Retriever"
+    },
+    {
+        "Type": "dog",
+        "Name": "Spot",
+        "Adoption Status": "foster",
+        "Picture": "https://www.purina.co.uk/sites/default/files/styles/square_medium_440x440/public/2022-07/Dalmatian.jpg?itok=yjYglscr",
+        "Height": "13 inches",
+        "Color": "White with black spots",
+        "Bio": "Spot is a ball of energy. She is always in the mood for an intense game of fetch. You'll get extra brownie point if you scratch her behind her ears.",
+        "Hypoallergenic": "no",
+        "Dietary Restrictions": "Chocolate",
+        "Breed": "Dalmatian"
+    },
+    {
+        "Type": "cat",
+        "Name": "Garfield",
+        "Adoption Status": "adopted",
+        "Picture": "https://petskb.com/wp-content/uploads/2019/10/Garfield-1-small.jpg",
+        "Height": "8 inches",
+        "Color": "Orange",
+        "Bio": "Garfield is an overweight tabby cat. He is famously lazy, sarcastic, arrogant, selfish, etc. His appetite is unsatiable and his diet mainly consists of lasagna. Still, people seems to love him",
+        "Hypoallergenic": "yes",
+        "Dietary Restrictions": "raisins",
+        "Breed": "unknown"
+    }
+]
