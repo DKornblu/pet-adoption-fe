@@ -1,16 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import PetCard from './PetCard'
-import { PetsContextInstance } from '../context/PetsContext'
 
 
-const PetList = () => {
-    const { petList } = useContext(PetsContextInstance);
+const PetList = ({listOfPets}) => {
 
     return (
-        <div>
-            {petList.map(
-                (pet) => <PetCard pet={pet} />)
-            }
+        <div className="PetList">
+            {listOfPets.length ? listOfPets.map((pet) => <PetCard key={pet.id} pet={pet} />) : null}
         </div>
     )
 }

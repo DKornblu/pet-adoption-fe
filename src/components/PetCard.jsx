@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import Button from 'react-bootstrap/Button';
+import { UsersContextInstance } from '../context/UsersContext';
 
 const PetCard = ({ pet }) => {
-  
+  const { isLoggedIn } = useContext(UsersContextInstance);
+
   // TODO: card should display img, name, current status + see more button
-    return (
+  return (
     <div className='PetCard'>
-        <img src="" alt="" />
-        <div className="PetName">Name: {pet.Name}</div>
-        <div className="PetStatus">Status: {pet.Status}</div>
-        <button>See More</button>
+      <img src={pet.Picture} alt="" className="PetImg" />
+      <div className="PetName">Name: {pet.name}</div>
+      <div className="PetStatus">Status: {pet.adoptionStatus}</div>
+
+      {isLoggedIn ? null :
+        <>
+          <div className="PetBreed">Breed: {pet.breed}</div>
+          <div className="PetType">Type: {pet.type}</div>
+          <Button> See More </Button>
+        </>
+      }
     </div>
   )
 }
