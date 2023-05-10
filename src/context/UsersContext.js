@@ -5,6 +5,7 @@ const UsersContextInstance = createContext({});
 const UsersContext = ({ children }) => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userDetails, setUserDetails] = useState({})
 
     // const getPetList = () => {
     //     console.log(petList);
@@ -15,7 +16,7 @@ const UsersContext = ({ children }) => {
     // }, []);
 
     return (
-        <UsersContextInstance.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+        <UsersContextInstance.Provider value={{ isLoggedIn, setIsLoggedIn, userDetails, setUserDetails }}>
             {children}
         </UsersContextInstance.Provider>
     )

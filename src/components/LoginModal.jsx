@@ -4,12 +4,12 @@ import SignupModalBody from './SignupModalBody';
 import LoginModalBody from './LoginModalBody';
 import { UsersContextInstance } from '../context/UsersContext'
 
-
 const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
+
+  const { userDetails, setUserDetails } = useContext(UsersContextInstance);
 
   const [show, setShow] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false)
-  const [userDetails, setUserDetails] = useState({})
   const [isMatch, setIsMatch] = useState(false);
 
   const handleShow = () => setShow(true);
@@ -18,7 +18,6 @@ const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
     setShow(false)
     setIsNewUser(false)
     setIsMatch(false)
-    setUserDetails({})
   };
 
   const handleUserDetails = (e) => {
@@ -26,6 +25,7 @@ const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
       ...userDetails,
       [e.target.name]: e.target.value
     })
+    console.log(userDetails)
   }
 
   const handleLogIn = () => {
@@ -40,6 +40,8 @@ const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
       return;
     }
     console.log('New user saved!', userDetails);
+    // TODO: save userDetails to the user list in the BE
+    setUserDetails({})
     handleClose();
   }
 
@@ -56,7 +58,7 @@ const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
         </Modal.Header>
         <Modal.Body>
           {!isNewUser ?
-            <LoginModalBody {...{ Form, setIsNewUser, userDetails, handleUserDetails }} />
+            <LoginModalBody {...{ Form, setIsNewUser, handleUserDetails, userDetails, setUserDetails}} />
             : <SignupModalBody {...{ Form, setIsNewUser, userDetails, handleUserDetails, isMatch, setIsMatch }} />
           }
         </Modal.Body>

@@ -8,13 +8,11 @@ import { Routes, Route } from "react-router-dom"
 
 function App() {
 
-  const [searchInput, setSearchInput] = useState('')
-
   return (
     <PetsContext>
       <UsersContext>
       <div className="App">
-        <Header searchInput={searchInput} setSearchInput={setSearchInput} />
+        <Header />
         <Routes>
           <Route path='/' element={<HomePage />} />
           {/* <Route path='/profile' element={<Profile />} />
