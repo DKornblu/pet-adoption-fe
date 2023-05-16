@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Modal, Button, Dropdown, DropdownButton, Form } from 'react-bootstrap';
 import PetList from './PetList';
 import { PetsContextInstance } from '../context/PetsContext';
 
@@ -56,7 +55,21 @@ function SearchModal() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="ModalSearchContainer">
-                    <input className='SearchBar' type='search' name='search' placeholder="search" value={searchInput} onChange={handleSearchInput} />
+                    <DropdownButton id="dropdown-basic-button" title="Pet Type" >
+                        <Dropdown.Item href="#/action-1" onClick={() => setSearchInput('dog')}>Dog</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2" onClick={() => setSearchInput('cat')}>Cat</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3" onClick={() => setSearchInput('rabbit')}>Rabbit</Dropdown.Item>
+                        <Dropdown.Item href="#/action-4" onClick={() => setSearchInput('snake')}>Snake</Dropdown.Item>
+                    </DropdownButton>
+                    <Form.Group className="mb-3">
+                        <Form.Select onChange={(event) => setSearchInput(event.target.value)}>
+                            <option value="dog">Dog</option>
+                            <option value="cat">Cat</option>
+                            <option value="rabbit">Rabbit</option>
+                            <option value="snake">Snake</option>
+                        </Form.Select>
+                    </Form.Group>
+                    <input className='SearchBar' type='search' name='search' placeholder="dog/cat/rabbit/snake" value={searchInput} onChange={handleSearchInput} />
                     <PetList listOfPets={filteredList} />
                 </Modal.Body>
             </Modal>

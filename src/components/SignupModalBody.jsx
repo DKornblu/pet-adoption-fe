@@ -15,8 +15,8 @@ const SignupModalBody = ({Form, setIsNewUser, userDetails, handleUserDetails, se
                 <Form.Control
                     type="first_name"
                     placeholder="first"
-                    name='first'
-                    value={userDetails.first}
+                    name='first_name'
+                    value={userDetails.first_name}
                     onChange={handleUserDetails}
                     autoFocus
                 />
@@ -25,9 +25,9 @@ const SignupModalBody = ({Form, setIsNewUser, userDetails, handleUserDetails, se
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                     type="last_name"
-                    name='last'
-                    placeholder="last"
-                    value={userDetails.last}
+                    name='last_name'
+                    placeholder='last'
+                    value={userDetails.last_name}
                     onChange={handleUserDetails}
                 />
             </Form.Group>

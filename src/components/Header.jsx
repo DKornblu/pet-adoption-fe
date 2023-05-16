@@ -5,24 +5,33 @@ import SearchModal from './SearchModal'
 import { Button } from 'react-bootstrap';
 import { UsersContextInstance } from '../context/UsersContext'
 import { FiLogOut } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom'
 
 
 const Header = () => {
-    const { isLoggedIn, setIsLoggedIn, setUserDetails } = useContext(UsersContextInstance);
+    const { token, setToken, setUserDetails, setCurrentUserName } = useContext(UsersContextInstance);
+    const navigate = useNavigate();
 
     const handleLogOut = () => {
+        localStorage.setItem("token", '')
+        localStorage.setItem("currentName", '')
         setUserDetails({})
-        setIsLoggedIn(false)
+        setToken('')
+        setCurrentUserName('')
+        navigate("/")
     }
 
     return (
         <header>
             <QuackIcon duckImg={white_duck} />
-            {isLoggedIn &&
+            {token ?
                 <Button style={{ backgroundColor: 'transparent', border: '1px solid white' }}
                     onMouseOver={(e) => e.target.style.backgroundColor = 'grey'}
-                    onMouseOut={(e) => e.target.style.backgroundColor = 'transparent'} onClick={handleLogOut}> Log Out <FiLogOut /> </Button>}
-            {!isLoggedIn && <SearchModal className="SearchModal" />}
+                    onMouseOut={(e) => e.target.style.backgroundColor = 'transparent'} onClick={handleLogOut}>
+                    Log Out <FiLogOut style={{fontSize: '1.25rem'}}/>
+                </Button>
+                :
+                <SearchModal className="SearchModal" />}
         </header >
     )
 }

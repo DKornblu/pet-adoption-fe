@@ -4,13 +4,14 @@ import SignupModalBody from './SignupModalBody';
 import LoginModalBody from './LoginModalBody';
 import { UsersContextInstance } from '../context/UsersContext'
 
-const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
+const LoginModal = () => {
 
-  const { userDetails, setUserDetails } = useContext(UsersContextInstance);
+  const { setToken, userDetails, setUserDetails, loginUser, signupUser, setCurrentUserName } = useContext(UsersContextInstance);
 
   const [show, setShow] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false)
   const [isMatch, setIsMatch] = useState(false);
+
 
   const handleShow = () => setShow(true);
 
@@ -28,27 +29,43 @@ const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
     console.log(userDetails)
   }
 
-  const handleLogIn = () => {
-    console.log('Logged in!', userDetails);
-    handleClose();
-    setIsLoggedIn(true);
+  const handleLogIn = async () => {
+    const res = await loginUser();
+    console.log('axios login response: ', res)
+    if (res.data && res.data.ok) {
+
+      setToken(res.data.token)
+      localStorage.setItem("token", res.data.token)
+
+      setUserDetails(res.data.user);
+      setCurrentUserName(res.data.user.first_name)
+      localStorage.setItem("currentName", res.data.user.first_name)
+
+      handleClose();
+    } else {
+      console.log("Error:", res.response.data);
+      alert(`${res.response.data}, try again buckeroo`);
+    }
   }
 
-  const handleSaveSignUp = () => {
+  // TODO: connect to BE, send userDetails to user list
+  const handleSaveSignUp = async () => {
     if (!isMatch) {
       alert("password wasn't verified bub")
       return;
     }
+
+    const res = await signupUser();
+    console.log('axios signup response: ', res.data)
     console.log('New user saved!', userDetails);
-    // TODO: save userDetails to the user list in the BE
+
     setUserDetails({})
     handleClose();
   }
 
-
   return (
     <>
-      <Button style={{backgroundColor: '#13678A', border: '1px solid #13678A'}} onClick={handleShow} className='ModalBtn'>
+      <Button style={{ backgroundColor: '#13678A', border: '1px solid #13678A' }} onClick={handleShow} className='ModalBtn'>
         Log In
       </Button>
 
@@ -58,7 +75,7 @@ const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
         </Modal.Header>
         <Modal.Body>
           {!isNewUser ?
-            <LoginModalBody {...{ Form, setIsNewUser, handleUserDetails, userDetails, setUserDetails}} />
+            <LoginModalBody {...{ Form, setIsNewUser, handleUserDetails, userDetails, setUserDetails }} />
             : <SignupModalBody {...{ Form, setIsNewUser, userDetails, handleUserDetails, isMatch, setIsMatch }} />
           }
         </Modal.Body>
@@ -66,8 +83,8 @@ const LoginModal = ({isLoggedIn, setIsLoggedIn}) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button style={{backgroundColor: '#13678A', border: '1px solid #13678A'}} onClick={!isNewUser ? handleLogIn : handleSaveSignUp}>
-            Save
+          <Button style={{ backgroundColor: '#13678A', border: '1px solid #13678A' }} onClick={!isNewUser ? handleLogIn : handleSaveSignUp}>
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>

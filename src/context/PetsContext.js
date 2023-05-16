@@ -20,7 +20,7 @@ const PetsContext = ({ children }) => {
     const fetchPets = async () => {
         try {
             const res = await axios.get(`${REACT_APP_SERVER_URL}/pets`)
-            console.log(res.data)
+            console.log('All Pets: ',res.data)
             setPetList(res.data);
         } catch (err) {
             console.log(err);
@@ -38,16 +38,16 @@ const PetsContext = ({ children }) => {
     }
 
     const newSnake = {
-        type: 'Snake',
-        name: 'Joe',
+        type: 'Dog',
+        name: 'Barry',
         adoptionStatus: 'Available',
         picture: '',
-        height: 5,
-        weight: 15,
-        bio: 'cute',
-        breed: 'who knows',
-        color: 'olive green',
-        dietary: 'kosher',
+        height: 23,
+        weight: 56,
+        bio: 'friendly',
+        breed: 'golden retriever',
+        color: 'gold',
+        dietary: 'dog food',
         hypoallergenic: false
     }
     // TODO: make add pet form and get rid of snake
