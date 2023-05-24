@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import LoginModal from './LoginModal'
 import adoptionCartoon from '../Images/5516806.jpg'
 import { FaRegGrinWink } from 'react-icons/fa';
@@ -7,7 +7,7 @@ import { UsersContextInstance } from '../context/UsersContext'
 import { PetsContextInstance } from '../context/PetsContext'
 
 const HomePage = () => {
-  const { token, userDetails, currentUserName } = useContext(UsersContextInstance);
+  const { token, currentUserName } = useContext(UsersContextInstance);
   const { petList, addPet, deletePet } = useContext(PetsContextInstance);
   const navigate = useNavigate();
 
@@ -35,8 +35,7 @@ const HomePage = () => {
             QuACK, {currentUserName}
           </h1>
           <p className="sillyDisclaimer"> (Don't worry, we'll only share your info with some people <FaRegGrinWink />)</p>
-          <button onClick={addPet}>Add Snake</button>
-          <button onClick={() => console.log(petList)}>Console Pet List</button>
+          <button onClick={() => console.log('All pets: ', petList)}>Console Pet List</button>
           <div className='BtnsContainer'>
             <div className="BtnRow">
             <button className="HomeBtn" onClick={()=>navigate("/mypets")}> My Pets </button>

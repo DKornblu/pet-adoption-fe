@@ -5,32 +5,31 @@ import { PetsContextInstance } from '../context/PetsContext';
 
 
 function SearchModal() {
-    const { petList, searchInput, setSearchInput } = useContext(PetsContextInstance)
+    const { petList, searchInputObject, setsearchInputObject, searchPets } = useContext(PetsContextInstance)
     const [show, setShow] = useState(false);
     const [filteredList, setFilteredList] = useState([]);
 
-    const handleSearchInput = (e) => {
-        setSearchInput(e.target.value)
+    const handlesearchInput = (e) => {
+        // console.log(e.target.type, e.target.name)
+        setsearchInputObject({
+            [e.target.type]: e.target.name
+        })
     }
 
     const handleHideModal = () => {
         setShow(false)
-        setSearchInput('')
+        setsearchInputObject({})
         setFilteredList([])
     }
 
-    const searchList = () => {
-        const serachInputLowerCase = searchInput.toLowerCase()
-        const searchPetList =
-            searchInput ? petList.filter(
-                pet => pet.type.toLowerCase().startsWith(serachInputLowerCase))
-                : []
+    const searchList = async () => {
+        const searchPetList = await searchPets(searchInputObject);
         setFilteredList(searchPetList);
     };
 
     useEffect(() => {
         searchList();
-    }, [searchInput])
+    }, [searchInputObject])
 
     return (
         <>
@@ -55,21 +54,21 @@ function SearchModal() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="ModalSearchContainer">
-                    <DropdownButton id="dropdown-basic-button" title="Pet Type" >
-                        <Dropdown.Item href="#/action-1" onClick={() => setSearchInput('dog')}>Dog</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2" onClick={() => setSearchInput('cat')}>Cat</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3" onClick={() => setSearchInput('rabbit')}>Rabbit</Dropdown.Item>
-                        <Dropdown.Item href="#/action-4" onClick={() => setSearchInput('snake')}>Snake</Dropdown.Item>
+                    <DropdownButton id="dropdown-basic-button" title={searchInputObject.type || 'Pet Type'} >
+                        <Dropdown.Item href="#/action-1" type='type' name='Dog' onClick={handlesearchInput}>Dog</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2" type='type' name='Cat' onClick={handlesearchInput}>Cat</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3" type='type' name='Rabbit' onClick={handlesearchInput}>Rabbit</Dropdown.Item>
+                        <Dropdown.Item href="#/action-4" type='type' name='Snake' onClick={handlesearchInput}>Snake</Dropdown.Item>
                     </DropdownButton>
-                    <Form.Group className="mb-3">
-                        <Form.Select onChange={(event) => setSearchInput(event.target.value)}>
+                    {/* <Form.Group className="mb-3">
+                        <Form.Select onChange={(event) => setsearchInputObject(event.target.value)}>
                             <option value="dog">Dog</option>
                             <option value="cat">Cat</option>
                             <option value="rabbit">Rabbit</option>
                             <option value="snake">Snake</option>
                         </Form.Select>
-                    </Form.Group>
-                    <input className='SearchBar' type='search' name='search' placeholder="dog/cat/rabbit/snake" value={searchInput} onChange={handleSearchInput} />
+                    </Form.Group> */}
+                    {/* <input className='SearchBar' type='search' name='search' placeholder="dog/cat/rabbit/snake" value={searchInputObject} onChange={handlesearchInput} /> */}
                     <PetList listOfPets={filteredList} />
                 </Modal.Body>
             </Modal>

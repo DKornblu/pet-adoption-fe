@@ -6,7 +6,7 @@ import { UsersContextInstance } from '../context/UsersContext'
 
 const LoginModal = () => {
 
-  const { setToken, userDetails, setUserDetails, loginUser, signupUser, setCurrentUserName } = useContext(UsersContextInstance);
+  const { setToken, setHeadersConfig, userDetails, setUserDetails, loginUser, signupUser, setCurrentUserName, setCurrentUserId, setIsAdmin } = useContext(UsersContextInstance);
 
   const [show, setShow] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false)
@@ -19,6 +19,7 @@ const LoginModal = () => {
     setShow(false)
     setIsNewUser(false)
     setIsMatch(false)
+    setUserDetails({})
   };
 
   const handleUserDetails = (e) => {
@@ -37,9 +38,15 @@ const LoginModal = () => {
       setToken(res.data.token)
       localStorage.setItem("token", res.data.token)
 
+      setHeadersConfig({ headers: { Authorization: `Bearer ${res.data.token}` } })
+
       setUserDetails(res.data.user);
+      setCurrentUserId(res.data.user.id);
       setCurrentUserName(res.data.user.first_name)
+      setIsAdmin(res.data.user.isAdmin)
+      localStorage.setItem("currentId", res.data.user.id)
       localStorage.setItem("currentName", res.data.user.first_name)
+      localStorage.setItem("isAdmin", res.data.user.isAdmin)
 
       handleClose();
     } else {
@@ -48,7 +55,6 @@ const LoginModal = () => {
     }
   }
 
-  // TODO: connect to BE, send userDetails to user list
   const handleSaveSignUp = async () => {
     if (!isMatch) {
       alert("password wasn't verified bub")
